@@ -1,0 +1,16 @@
+version: "2"
+services:
+  phpapp: # appli php
+    build: ./docker/website # mettre dossier courant par ./ ou pas
+    image: php7apache
+    ports:
+    - "5558:80"
+    links:
+    - pyapp
+    volumes:
+    - ./docker/website:/var/www/html
+  pyapp:
+    build: docker/python
+    image: python3onbuild
+    ports:
+    - "6566:80"
